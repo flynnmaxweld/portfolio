@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-title="info.title">
+<head>
+  <meta charset="UTF-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Info — Flynn Maxwel</title>
+  <meta name="description" content="Computer Science student specializing in Artificial Intelligence and Machine Learning.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Info — Flynn Maxwel">
+  <meta property="og:description" content="Computer Science student specializing in Artificial Intelligence and Machine Learning.">
+  <meta property="og:image" content="assets/images/cover/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="assets/images/cover/cover.jpg">
+  <meta name="author" content="Flynn Maxwel">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+  <link rel="canonical" href="https://www.lukebaffait.fr/info">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="preload" href="assets/fonts/Breton.woff2" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="assets/fonts/Machine.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="assets/images/profile/me.avif" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="styles/info.css">
+</head>
+<body>
+
+  <div class="info-canvas" id="info-canvas"></div>
+  <div class="info-vignette"></div>
+
+  <div class="intro-overlay" id="intro-overlay"></div>
+
+  <div class="page-title" id="page-title">Info</div>
+
+  <a class="back-btn" id="back-btn" href="index.html" aria-label="Retour à l'accueil">
+    <span class="chr-hover" data-chr="Back"></span>
+  </a>
+
+  <main class="info-main" id="info-main">
+
+    <section class="info-left">
+      <div class="info-photo-wrap">
+        <img class="info-photo" src="assets/images/profile/me.avif" alt="Luke Baffait" decoding="async">
+        <span class="frame-corner tl"></span>
+        <span class="frame-corner tr"></span>
+        <span class="frame-corner bl"></span>
+        <span class="frame-corner br"></span>
+      </div>
+      <div class="info-meta">
+        <span class="info-meta-label" data-i18n="info.meta.based">Basé à</span>
+        <span class="info-meta-value" data-i18n="info.meta.based.value">Vannes, France</span>
+      </div>
+      <div class="info-meta">
+        <span class="info-meta-label" data-i18n="info.meta.status">Statut</span>
+        <span class="info-meta-value" data-i18n="info.meta.status.value">En recherche d'alternance</span>
+      </div>
+    </section>
+
+    <section class="info-right">
+      <div class="info-headline">
+        <span class="info-eyebrow" data-i18n="info.eyebrow">About</span>
+        <h1 class="info-name">Flynn Maxwel.</h1>
+        <p class="info-role" data-i18n="info.role">Computer Science student specializing in Artificial Intelligence &amp; Machine Learning.</p>
+      </div>
+
+      <p class="info-desc" data-i18n="info.desc">
+        I don't just build software. I explore the systems behind it. I'm Flynn Maxwel, a Computer Science student specializing in Artificial Intelligence and Machine Learning, creating digital experiences where engineering precision meets thoughtful design.
+      </p>
+
+      <div class="info-skills">
+        <div class="skill-col">
+          <div class="skill-col-title" data-i18n="info.skills.systems">Systems</div>
+          <ul>
+            <li>Python</li>
+            <li>Java</li>
+            <li>Linux</li>
+            <li>Internet of Things (IoT)</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <div class="skill-col-title" data-i18n="info.skills.interfaces">Interfaces</div>
+          <ul>
+            <li>React.js</li>
+            <li>Next.js</li>
+            <li>Figma</li>
+            <li>UI/UX Design</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <div class="skill-col-title" data-i18n="info.skills.intelligence">Intelligence</div>
+          <ul>
+            <li>Machine Learning</li>
+            <li>Computer Vision</li>
+            <li>Large Language Models (LLMs)</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <div class="skill-col-title" data-i18n="info.skills.security">Security &amp; Tools</div>
+          <ul>
+            <li>Wireless Network Assessment</li>
+            <li>Password Auditing</li>
+            <li>Docker · Git</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="info-bottom" id="info-bottom">
+    <a class="info-mail chr-hover" data-chr="flynnmaxweld@gmail.com" href="mailto:flynnmaxweld@gmail.com"></a>
+  </div>
+
+  <script defer src="js/i18n.js"></script>
+  <script defer src="js/core-renderer.js"></script>
+  <script defer src="js/hero-project.js"></script>
+  <script defer src="js/vendor/gsap.min.js"></script>
+  <script defer src="js/info.js"></script>
+</body>
+</html>
