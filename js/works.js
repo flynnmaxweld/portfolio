@@ -502,11 +502,20 @@
 
     window.addEventListener('resize', measureCube);
 
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(playIntro);
-    } else {
-      window.addEventListener('load', playIntro);
+    var worksIntroPlayed = false;
+    function triggerWorksIntroOnce() {
+      if (worksIntroPlayed) return;
+      worksIntroPlayed = true;
+      playIntro();
     }
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      triggerWorksIntroOnce();
+    } else {
+      document.addEventListener('DOMContentLoaded', triggerWorksIntroOnce);
+      window.addEventListener('load', triggerWorksIntroOnce);
+    }
+    setTimeout(triggerWorksIntroOnce, 250);
 
     window.addEventListener('pageshow', function(e) {
       isLeavingWithFade = false;

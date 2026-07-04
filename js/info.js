@@ -6,6 +6,19 @@ if (history.scrollRestoration) {
 window.scrollTo(0, 0);
 requestAnimationFrame(() => window.scrollTo(0, 0));
 
+window.addEventListener('touchmove', (e) => {
+  if (e.touches && e.touches.length > 0) {
+    const t = e.touches[0];
+    const mouseEvt = new MouseEvent('mousemove', {
+      clientX: t.clientX,
+      clientY: t.clientY,
+      bubbles: true,
+      cancelable: true
+    });
+    window.dispatchEvent(mouseEvt);
+  }
+}, { passive: true });
+
 (function () {
   const projectData = window._heroProjectData;
   if (!projectData) return;
@@ -16,6 +29,13 @@ requestAnimationFrame(() => window.scrollTo(0, 0));
   
   if (container) {
     container.setAttribute('data-cr-project-src', blobUrl);
+    const isMobile = navigator.maxTouchPoints > 1;
+    if (isMobile) {
+      container.setAttribute('data-cr-dpi', '1.0');
+      container.setAttribute('data-cr-scale', '0.75');
+      container.setAttribute('data-cr-fps', '40');
+      container.setAttribute('data-cr-lazyload', 'true');
+    }
     CoreRenderer.init().then(() => {
       URL.revokeObjectURL(blobUrl);
     }).catch(err => {
@@ -126,11 +146,20 @@ function playInfoIntro() {
   tl.add(function () { main.classList.add('ready'); }, t0 + 0.4);
 }
 
-if (document.fonts && document.fonts.ready) {
-  document.fonts.ready.then(playInfoIntro);
-} else {
-  window.addEventListener('load', playInfoIntro);
+let infoIntroPlayed = false;
+function triggerInfoIntroOnce() {
+  if (infoIntroPlayed) return;
+  infoIntroPlayed = true;
+  playInfoIntro();
 }
+
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  triggerInfoIntroOnce();
+} else {
+  document.addEventListener('DOMContentLoaded', triggerInfoIntroOnce);
+  window.addEventListener('load', triggerInfoIntroOnce);
+}
+setTimeout(triggerInfoIntroOnce, 250);
 
 window.addEventListener('pageshow', function (e) {
   isLeavingWithFade = false;

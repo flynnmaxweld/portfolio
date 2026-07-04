@@ -9,6 +9,12 @@
   font-weight: normal; font-style: normal; font-display: block;
 }
 
+:root {
+  --accent-hue: 9;
+  --accent: hsl(var(--accent-hue), 100%, 54%);
+  --accent-glow: hsl(var(--accent-hue), 100%, 50%);
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { width: 100%; height: 100%; scrollbar-width: none; overflow: hidden; }
 html::-webkit-scrollbar { display: none; }
@@ -27,6 +33,9 @@ body {
   width: 100vw; height: 100vh;
   display: block;
   z-index: 0;
+}
+.info-canvas canvas {
+  filter: hue-rotate(calc((var(--accent-hue) - 9) * 1deg));
 }
 .info-vignette {
   position: fixed; inset: 0;
@@ -254,6 +263,13 @@ body {
   .page-title, .back-btn { top: 1.5rem; }
   .page-title { left: 1.5rem; }
   .back-btn { right: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .info-skills {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+  }
 }
 
 

@@ -14,9 +14,28 @@ const isSlowHardware = isMobile || (navigator.hardwareConcurrency || 8) <= 4;
 
 let lastMouseX = window.innerWidth / 2;
 let lastMouseY = window.innerHeight / 2;
+
+function updateCoords(x, y) {
+  lastMouseX = x;
+  lastMouseY = y;
+}
+
 window.addEventListener('mousemove', (e) => {
-  lastMouseX = e.clientX;
-  lastMouseY = e.clientY;
+  updateCoords(e.clientX, e.clientY);
+}, { passive: true });
+
+window.addEventListener('touchmove', (e) => {
+  if (e.touches && e.touches.length > 0) {
+    const t = e.touches[0];
+    updateCoords(t.clientX, t.clientY);
+    const mouseEvt = new MouseEvent('mousemove', {
+      clientX: t.clientX,
+      clientY: t.clientY,
+      bubbles: true,
+      cancelable: true
+    });
+    window.dispatchEvent(mouseEvt);
+  }
 }, { passive: true });
 
 let _isForcingScroll = false;
@@ -74,6 +93,12 @@ function startShader() {
   
   if (container) {
     container.setAttribute('data-cr-project-src', blobUrl);
+    if (isMobile) {
+      container.setAttribute('data-cr-dpi', '1.0');
+      container.setAttribute('data-cr-scale', '0.75');
+      container.setAttribute('data-cr-fps', '40');
+      container.setAttribute('data-cr-lazyload', 'true');
+    }
     CoreRenderer.init().then(() => {
       URL.revokeObjectURL(blobUrl);
       
@@ -386,7 +411,7 @@ document.querySelectorAll('.chr-hover').forEach((el, elIdx) => {
   });
 });
 
-const lenis = new Lenis({ lerp: 0.06 });
+const lenis = new Lenis({ lerp: 0.08, smoothWheel: true, syncTouch: true });
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
@@ -985,10 +1010,10 @@ function setupProjectsSection() {
       trigger: item,
       start: 'top 52%',
       end: 'bottom 48%',
-      onEnter: () => lenis && lenis.options && (lenis.options.lerp = 0.04),
-      onLeave: () => lenis && lenis.options && (lenis.options.lerp = 0.06),
-      onEnterBack: () => lenis && lenis.options && (lenis.options.lerp = 0.04),
-      onLeaveBack: () => lenis && lenis.options && (lenis.options.lerp = 0.06),
+      onEnter: () => lenis && lenis.options && (lenis.options.lerp = 0.05),
+      onLeave: () => lenis && lenis.options && (lenis.options.lerp = 0.08),
+      onEnterBack: () => lenis && lenis.options && (lenis.options.lerp = 0.05),
+      onLeaveBack: () => lenis && lenis.options && (lenis.options.lerp = 0.08),
     });
   });
 
@@ -1013,18 +1038,45 @@ function setupProjectsSection() {
 
   
   ; (function () {
-    if (isMobileViewport()) return; 
+    function resizeSlices() {
+      const isMobile = isMobileViewport();
+      const currentVw = window.innerWidth;
+      
+      const imgW = isMobile ? Math.min(Math.max(140, currentVw * 0.42), 200) : Math.min(Math.max(120, currentVw * 0.14), 210);
+      const imgH = imgW * 2 / 3;
+      const orbitR = isMobile ? (currentVw * 0.45 + 160) / 2 : (currentVw * 0.34 + 500) / 2;
+      const bendRad = imgW / orbitR;
+      const cylR = orbitR;
+      const sliceW = imgW / 10;
+      const totalBendDeg = bendRad * 180 / Math.PI;
+      const stepDeg = totalBendDeg / 10;
 
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
+      document.querySelectorAll('.cg-img').forEach(function (wrapper) {
+        wrapper.style.width = imgW + 'px';
+        wrapper.style.height = imgH + 'px';
+        
+        var slices = wrapper.querySelectorAll('.cg-slice');
+        if (slices.length === 10) {
+          slices.forEach(function (sl, s) {
+            var displayW = sliceW + 1.5;
+            sl.style.width = displayW.toFixed(1) + 'px';
+            sl.style.marginLeft = (-displayW / 2).toFixed(1) + 'px';
+            sl.style.backgroundSize = imgW.toFixed(1) + 'px ' + imgH.toFixed(1) + 'px';
+            sl.style.backgroundPosition = (-s * sliceW).toFixed(1) + 'px 0';
+            sl.style.transformOrigin = '50% 50% ' + (-cylR).toFixed(1) + 'px';
+            var angle = (s - 4.5) * stepDeg;
+            sl.style.transform = 'rotateY(' + angle.toFixed(2) + 'deg)';
+          });
+        }
+      });
+    }
 
-    
     (function buildSlices() {
       var SLICES = 10;
-      var imgW = Math.min(Math.max(120, vw * 0.14), 210);
+      var imgW = isMobileViewport() ? Math.min(Math.max(140, window.innerWidth * 0.42), 200) : Math.min(Math.max(120, window.innerWidth * 0.14), 210);
       var imgH = imgW * 2 / 3;
       
-      var orbitR = (vw * 0.34 + 500) / 2; 
+      var orbitR = isMobileViewport() ? (window.innerWidth * 0.45 + 160) / 2 : (window.innerWidth * 0.34 + 500) / 2; 
       var bendRad = imgW / orbitR;
       var cylR = orbitR;
       var sliceW = imgW / SLICES;
@@ -1035,6 +1087,8 @@ function setupProjectsSection() {
         var src = img.getAttribute('src');
         var wrapper = document.createElement('div');
         wrapper.className = 'cg-img';
+        wrapper.style.width = imgW + 'px';
+        wrapper.style.height = imgH + 'px';
 
         for (var s = 0; s < SLICES; s++) {
           var sl = document.createElement('div');
@@ -1054,6 +1108,7 @@ function setupProjectsSection() {
 
         img.parentNode.replaceChild(wrapper, img);
       });
+      window.addEventListener('resize', resizeSlices, { passive: true });
     })();
 
     const cgImgs = gsap.utils.toArray('.cg-img');
@@ -1083,18 +1138,18 @@ function setupProjectsSection() {
     })(cgPhrase);
     var cgPhraseWords = gsap.utils.toArray('#cg-phrase .word');
 
-    
-    const rx = vw * 0.34;
-    const rz = 500;
-    const tiltY = vw <= 768 ? 80 : 180;
-
-    
-    var entryAngle = Math.PI / 2;
-    var offX = vw * 0.85;
+       var entryAngle = Math.PI / 2;
 
     function getPos(t) {
+      const isMobile = isMobileViewport();
+      const currentVw = window.innerWidth;
+      
+      const rx = isMobile ? currentVw * 0.42 : currentVw * 0.34;
+      const rz = isMobile ? 180 : 500;
+      const tiltY = isMobile ? 40 : (currentVw <= 768 ? 80 : 180);
+      const offX = isMobile ? currentVw * 0.95 : currentVw * 0.85;
+
       if (t <= 0.12) {
-        
         var p = t / 0.12;
         return {
           x: -offX * (1 - p),    
@@ -1104,13 +1159,10 @@ function setupProjectsSection() {
         };
       }
       if (t <= 0.88) {
-        
         var p = (t - 0.12) / 0.76;
         var angle = entryAngle - p * Math.PI * 2;
         var x = Math.cos(angle) * rx;
         var z = Math.sin(angle) * rz;
-
-        
         var ry = p * Math.PI * 2;
 
         return {
@@ -1120,7 +1172,6 @@ function setupProjectsSection() {
           rotY: ry
         };
       }
-      
       var p = (t - 0.88) / 0.12;
       return {
         x: offX * p,             
@@ -1216,10 +1267,7 @@ function setupProjectsSection() {
       { id: 'circle-gallery', name: 'Gallery' },
       { id: 'skills', name: 'Skills' },
       { id: 'contact', name: 'Contact' },
-    ].filter(function (sec) {
-      if (sec.id === 'circle-gallery' && isMobileViewport()) return false;
-      return true;
-    });
+    ];
 
     var scrollY0 = window.scrollY || window.pageYOffset;
     var zoneTop = document.getElementById(sections[0].id).getBoundingClientRect().top + scrollY0;

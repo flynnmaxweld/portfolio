@@ -21,6 +21,12 @@
       font-weight: normal; font-style: normal; font-display: block;
     }
 
+    :root {
+      --accent-hue: 9;
+      --accent: hsl(var(--accent-hue), 100%, 54%);
+      --accent-glow: hsl(var(--accent-hue), 100%, 50%);
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { width: 100%; height: 100%; scrollbar-width: none; overflow: hidden; }
     html::-webkit-scrollbar { display: none; }
@@ -181,7 +187,7 @@
     }
     .face-year {
       font-family: 'other', sans-serif;
-      font-size: 0.85rem; color: #ff1e00; margin-bottom: 1rem;
+      font-size: 0.85rem; color: var(--accent-glow); margin-bottom: 1rem;
     }
     .face-desc {
       font-family: 'Breton', sans-serif;
@@ -276,13 +282,23 @@
       .face-content.layout-left,
       .face-content.layout-right { flex-direction: column; }
       .face-cover { width: 100%; height: 60%; }
-      .face-info { width: 100%; height: 40%; padding: 1.2rem; }
+      .face-info { width: 100%; height: 40%; padding: 1.2rem; overflow-y: auto; }
       .layout-left .face-name { top: 1rem; right: 1rem; font-size: clamp(1.2rem, 5vw, 2rem); }
       .layout-right .face-name { top: 1rem; left: 1rem; font-size: clamp(1.2rem, 5vw, 2rem); }
       .face-desc { font-size: clamp(0.85rem, 2.8vw, 1.1rem); }
       .page-title { top: 1.5rem; left: 1.5rem; font-size: clamp(1.8rem, 7vw, 3rem); }
       .back-btn { top: 1.5rem; right: 1.5rem; }
       .scroll-hint { bottom: 1.5rem; left: 1.5rem; }
+      .ruler { display: none !important; }
+      .counter-wrap {
+        position: fixed !important;
+        left: auto !important;
+        right: 1.5rem !important;
+        top: auto !important;
+        bottom: 1.5rem !important;
+        margin-top: 0 !important;
+        z-index: 100 !important;
+      }
     }
 
 
