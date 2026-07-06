@@ -1576,7 +1576,7 @@ function setupProjectsSection() {
         for (var x = 0; x < cols; x++) {
           var i = (y * cols + x) * 4;
           var r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
-          if (a < 15) { line += ' '; poolRow.push(-1); continue; }
+          if (a < 15 || (r > 240 && g > 240 && b > 240)) { line += ' '; poolRow.push(-1); continue; }
           var brightness = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
           brightness *= (a / 255);
           var pi = Math.floor(brightness * (POOLS.length - 1) * 0.8);
