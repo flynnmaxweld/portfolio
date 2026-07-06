@@ -18,7 +18,7 @@
 
     'index.title': 'Flynn Maxwel',
     'index.h1': 'Flynn Maxwel — Computer Science student specializing in Artificial Intelligence and Machine Learning.',
-    'index.hero.tagline': 'Learning how systems work.<br><span class="other-accent">Designing how they feel.</span>',
+    'index.hero.tagline': 'Automating the complex.<br><span class="other-accent">Engineering the intelligent.</span>',
     'index.about.text': 'I don\'t just build software. I explore the systems behind it. I\'m Flynn Maxwel, a Computer Science student specializing in <span class="other-accent">Artificial Intelligence</span> and <span class="other-accent">Machine Learning</span>, creating digital experiences where engineering precision meets thoughtful design.',
     'index.about.sub': "As a Computer Science student, I enjoy building software that solves real problems, combining clean design with solid engineering to create experiences that are simple, intuitive, and reliable.",
     'index.cg.phrase': "Every project is an opportunity to <span class=\"other-accent\">learn</span>, <span class=\"other-accent\">experiment</span>, and build with purpose.",
