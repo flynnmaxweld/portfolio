@@ -10,7 +10,7 @@
 }
 
 :root {
-  --accent-hue: 258;
+  --accent-hue: 9;
   --accent: hsl(var(--accent-hue), 100%, 54%);
   --accent-glow: hsl(var(--accent-hue), 100%, 50%);
 }
