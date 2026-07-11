@@ -1019,13 +1019,14 @@ function setupProjectsSection() {
 
   
   const linePath = document.getElementById('fluid-line');
+  const lineGlow = document.getElementById('fluid-line-glow');
   const lineLen = linePath.getTotalLength();
 
   
-  gsap.set(linePath, { strokeDasharray: lineLen, strokeDashoffset: lineLen });
+  gsap.set([linePath, lineGlow], { strokeDasharray: lineLen, strokeDashoffset: lineLen });
 
   
-  gsap.to(linePath, {
+  gsap.to([linePath, lineGlow], {
     strokeDashoffset: 0,
     ease: 'none',
     scrollTrigger: {

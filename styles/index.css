@@ -35,9 +35,9 @@
 }
 
 :root {
-  --accent-hue: 9;
-  --accent: hsl(var(--accent-hue), 100%, 54%);
-  --accent-glow: hsl(var(--accent-hue), 100%, 50%);
+  --accent-hue: 0;
+  --accent: #ffffff;
+  --accent-glow: #ffffff;
 }
 
 *,
@@ -217,7 +217,7 @@ body {
   z-index: 0;
 }
 .hero-canvas canvas {
-  filter: hue-rotate(calc((var(--accent-hue) - 9) * 1deg));
+  filter: grayscale(100%) brightness(1.3);
 }
 
 .hero-content {
@@ -771,10 +771,16 @@ a.chr-hover {
 
 .fluid-line {
   fill: none;
-  stroke: var(--accent-glow);
-  stroke-width: 72;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+.fluid-glow {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 24;
+}
+.fluid-core {
+  stroke: #ffffff;
+  stroke-width: 2.2;
 }
 
 .about-photo-wrap {

@@ -10,9 +10,9 @@
 }
 
 :root {
-  --accent-hue: 9;
-  --accent: hsl(var(--accent-hue), 100%, 54%);
-  --accent-glow: hsl(var(--accent-hue), 100%, 50%);
+  --accent-hue: 0;
+  --accent: #ffffff;
+  --accent-glow: #ffffff;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
