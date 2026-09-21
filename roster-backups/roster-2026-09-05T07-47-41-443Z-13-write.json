@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "savedAt": "2026-09-05T07:47:39.795Z",
+  "agents": [
+    {
+      "id": "god",
+      "name": "Michael",
+      "character": "michael",
+      "accent": "lemon",
+      "description": "god — runs the floor, triages requests, escalates only critical calls to you",
+      "project": "hive",
+      "tmuxTarget": "",
+      "cwd": "/run/media/codex/Max/LINUX/Portfolio",
+      "status": "idle",
+      "action": "idle",
+      "progress": 0,
+      "currentStation": "desk",
+      "ptyId": "pty-god",
+      "command": "claude --model claude-opus-4-8[1m] --permission-mode bypassPermissions",
+      "provider": "claude",
+      "model": "claude-opus-4-8[1m]",
+      "isGod": true
+    },
+    {
+      "id": "jim-mto1nace",
+      "name": "Portfolio",
+      "character": "jim",
+      "accent": "sky",
+      "description": "Work in /run/media/codex/Max/LINUX/Portfolio/. Read AGENTS.md at the root and follow it. Verify with the project build/lint before finishing. Ask before destructive or wide changes.",
+      "project": "Portfolio",
+      "tmuxTarget": "",
+      "cwd": "/run/media/codex/Max/LINUX/Portfolio",
+      "goal": "Keep the Portfolio static site healthy: build passes, lint clean, ship requested features.",
+      "status": "working",
+      "action": "useransweredclaude",
+      "progress": 1,
+      "currentStation": "desk",
+      "ptyId": "pty-jim-mto1nace",
+      "command": "claude --model claude-fable-5 --permission-mode bypassPermissions",
+      "provider": "claude",
+      "model": "claude-fable-5",
+      "archived": false,
+      "lastPrompt": "spawn a agent for front end"
+    }
+  ],
+  "archived": [],
+  "restorable": [],
+  "queues": {},
+  "selectedId": "god"
+}

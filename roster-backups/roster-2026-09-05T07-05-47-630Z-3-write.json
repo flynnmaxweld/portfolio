@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "savedAt": "2026-09-05T07:05:43.751Z",
+  "agents": [
+    {
+      "id": "god",
+      "name": "Michael",
+      "character": "michael",
+      "accent": "lemon",
+      "description": "god — runs the floor, triages requests, escalates only critical calls to you",
+      "project": "hive",
+      "tmuxTarget": "",
+      "cwd": "/run/media/codex/Max/LINUX/Portfolio",
+      "status": "idle",
+      "action": "running the floor",
+      "progress": 0,
+      "currentStation": "desk",
+      "ptyId": "pty-god",
+      "command": "claude --model claude-opus-4-8[1m] --permission-mode bypassPermissions",
+      "provider": "claude",
+      "model": "claude-opus-4-8[1m]",
+      "isGod": true
+    }
+  ],
+  "archived": [],
+  "restorable": [
+    {
+      "id": "portfolio-mtnz8r2u",
+      "name": "Portfolio",
+      "character": "jim",
+      "accent": "sky",
+      "description": "Keep the Portfolio static site healthy: build passes, lint clean, ship requested features.",
+      "project": "Portfolio",
+      "tmuxTarget": "",
+      "cwd": "/run/media/codex/Max/LINUX/Portfolio",
+      "goal": "Work in /run/media/codex/Max/LINUX/Portfolio/. Read AGENTS.md at the root and follow it. Verify with the project build/lint before finishing. Ask before destructive or wide changes.",
+      "status": "idle",
+      "action": "reconnecting…",
+      "progress": 0,
+      "currentStation": "desk",
+      "ptyId": "pty-portfolio-mtnz8r2u",
+      "command": "claude --permission-mode bypassPermissions",
+      "provider": "claude",
+      "model": "auto/best-free"
+    }
+  ],
+  "queues": {},
+  "selectedId": "god"
+}
