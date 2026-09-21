@@ -4,6 +4,7 @@ import path from 'node:path'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [react()],
   assetsInclude: ['**/*.otf', '**/*.woff2', '**/*.woff', '**/*.ttf'],
   publicDir: 'public',
